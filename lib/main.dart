@@ -4,13 +4,15 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(); // Carrega as variáveis do .env
 
+  // Carrega o .env
+  await dotenv.load(fileName: ".env");
+
+  // Inicializa o Supabase com dados do .env
   await Supabase.initialize(
     url: dotenv.env['SUPABASE_URL']!,
     anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
   );
-
   runApp(const MyApp());
 }
 
